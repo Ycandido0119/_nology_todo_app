@@ -1,11 +1,21 @@
 import './App.css'
 import Todo from './components/todo';
+import Form from './components/Form';
+import FilterButton from './components/FilterButton'
+
 
 function App(props) {
+  const taskList = props.tasks?.map((task) => ( <Todo id={task.id} name={task.name} completed={task.completed} key={task.id} />));
+
   return (
     <div className="todoapp stack-large">
      <h1>To-Do App</h1>
-     <form>
+     <Form />
+     <div className="filters btn-group stack-exception">
+        <FilterButton />
+        <FilterButton />
+        <FilterButton />
+      </div>
       <h2 className="label-wrapper">
         <label htmlFor="new-todo-input" className="label__lg">
         What needs to be done?
@@ -21,7 +31,6 @@ function App(props) {
       <button type="submit" className="btn btn__primary btn__lg">
        Add
       </button>
-     </form>
      <div className="filters btn-group stack-exception">
        <button type="button" className="btn toggle-btn" aria-pressed="true">
           <span className="visually-hidden">Show </span>
@@ -39,9 +48,7 @@ function App(props) {
        role="list"
        className="todo-list stack-large stack-exception"
        aria-labelledby="list-heading">
-       <Todo name="Eat" id="todo-0" completed />
-       <Todo name="Sleep" id="todo-1" />
-       <Todo name="Repeat" id="todo-2" />
+       {taskList}
      </ul>
     </div>
   );
